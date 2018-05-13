@@ -34,6 +34,13 @@ class Wallet{
         }
 
 
+        if(recipient === this.publicKey){
+            console.log("You cannot send money to your own wallet from your own wallet");
+
+            return;
+        }
+
+
         let transaction = transactionPool.existingTransaction(this.publicKey);
 
         if(transaction){

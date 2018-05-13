@@ -61,6 +61,17 @@ app.post('/transact',(req,res)=>{
 
     const transaction = wallet.createTransaction(recipient,amount,bc,tp);
     p2pServer.broadcastTransaction(transaction);
+
+    if(transaction){
+        p2pServer.broadcastTransaction(transaction);
+        res.redirect('/transactions');
+    } else {
+
+        res.setHeader('content-type', 'application/json');
+        res.json({
+            message: "Invalid transaction!"
+        })
+    }
     res.redirect('/transactions');
 })
 
