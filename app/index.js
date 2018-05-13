@@ -7,7 +7,7 @@ const TransactionPool = require("../wallet/transaction-pool")
 const Miner = require('./miner');
 
 
-const HTTP_PORT = process.env.HTTP_PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 
 const app = express();
@@ -64,8 +64,8 @@ app.post('/transact',(req,res)=>{
     res.redirect('/transactions');
 })
 
-app.listen(HTTP_PORT,()=>{
-    console.log(`Listening on port ${HTTP_PORT}`)
+app.listen(PORT,()=>{
+    console.log(`Listening on port ${PORT}`)
 })
 
 p2pServer.listen();
