@@ -1,4 +1,4 @@
-const DIFFICULTY = 10;
+const DIFFICULTY = 5;
 const MINE_RATE = 5000;
 const INITIAL_BALANCE = 100;
 const MINING_REWARD = 10;
