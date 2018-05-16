@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const Blockchain = require("../blockchain");
@@ -38,6 +40,15 @@ app.get('/public-key',(req,res)=>{
 })
 
 
+app.get('/balance',(req,res)=>{
+    const walletBalance = wallet.calculateBalance(bc);
+
+    res.setHeader('content-type', 'application/json');
+        res.json({
+            balance: walletBalance
+        })
+})
+
 app.get('/mine-transactions',(req,res)=>{
     const block = miner.mine()
 
@@ -64,7 +75,6 @@ app.post('/transact',(req,res)=>{
 
     if(transaction){
         p2pServer.broadcastTransaction(transaction);
-        res.redirect('/transactions');
     } else {
 
         res.setHeader('content-type', 'application/json');
