@@ -1,4 +1,5 @@
 const Websocket = require('ws');
+const http = require('http');
 
 const P2P_PORT = process.env.P2P_PORT || 5001;
 const peers = process.env.PEERS ? process.env.PEERS.split(',') : [];
@@ -9,16 +10,19 @@ const MESSAGE_TYPES = {
 }
 
 class P2pServer {
-    constructor(blockchain,transactionPool) {
+    constructor(blockchain,transactionPool,app) {
         this.blockchain = blockchain;
         this.transactionPool = transactionPool;
         this.sockets = [];
+        this.server = http.createServer(app)
 
     }
 
     listen(){
         const server = new Websocket.Server({
-            port: P2P_PORT
+            port: P2P_PORT,
+            server: this.server
+            
         });
 
 
